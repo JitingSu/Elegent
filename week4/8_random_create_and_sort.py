@@ -1,16 +1,14 @@
-# 随机生成多组长度递增的随机数列，使用不同的排序算法进行排序
-# 作为测试代码，需要修改以及再看
-
+# 随机生成多组长度递增的随机数列，使用不同的排序算法进行排序，并分析不同排序算法在不同长度数列下的运行效果
 import random
-# 计算程序运行时间的库
 import datetime
-# 深度复制列表的库
 import copy
 
-num = range(0, 1000000)  # 范围在0到100000之间，需要用到range()函数。
-nums = random.sample(num, 10010)  # 选取10010个元素
-print(nums)
+num = range(0, 100000)
+# 随机地从指定列表中提取出1000个不同的元素，列表的维数没有限制
+nums = random.sample(num, 1000)
+# print(nums)
 # 将nums深度复制为5份
+# 深度复制是指重新分配一块内存，创建一个新的对象，并且将原对象中的元素，以递归的方式，通过创建新的子对象拷贝到新对象中。因此，新对象和原对象没有任何关联.
 nums0 = copy.deepcopy(nums)
 nums1 = copy.deepcopy(nums)
 nums2 = copy.deepcopy(nums)
@@ -18,32 +16,95 @@ nums3 = copy.deepcopy(nums)
 nums4 = copy.deepcopy(nums)
 
 
+# 选择排序
+# 工作原理：第一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，继续放在起始位置直到未排序元素个数为0。
+def select_sort(nums):
+    for i in range(len(nums)):
+        min_num = i
+        for j in range(i + 1, len(nums)):
+            if nums[min_num] > nums[j]:
+                nums[j], nums[min_num] = nums[min_num], nums[j]
+    # print("选择排序结果如下：")
+    # print(nums)
+
+
+
+
+# 归并排序
+def mergesort(nums):
+    if len(nums) <= 1:
+        return nums
+    else:
+        count = int(len(nums) / 2)
+        left = mergesort(nums[:count])
+        right = mergesort(nums[count:])
+        return merge(left, right)
+
+
+def merge(left, right):
+    r, l = 0, 0
+    result = []
+    while l < len(left) and r < len(right):
+        if left[l] <= right[r]:
+            result.append(left[l])
+            l += 1
+        else:
+            result.append(right[r])
+            r += 1
+    # 剩余的数也要加上
+    # list()函数是Python的内置函数。它可以将任何可迭代数据转换为列表类型，并返回转换后的列表。
+    result += list(left[l:])
+    result += list(right[r:])
+    return result
+# print(mergesort(nums))
+
+
 # 冒泡排序
-def MP(nums):
+# 每进行一轮“冒泡”，需要比较的元素都少一个
+def bubble_sort(nums):
     for i in range(len(nums) - 1):
-        for j in range(len(nums) - i - 1):
-            if nums[j] > nums[j + 1]:  # 如果前面的数小于后面的数则交换二者的值
+        for j in range(len(nums) - 1 - i):
+            if nums[j] > nums[j + 1]:
                 nums[j], nums[j + 1] = nums[j + 1], nums[j]
-    print("冒泡排序结果如下：")
-    print(nums)  # 输出排序后的数据
+    # print("冒泡排序结果如下：")
+    # print(nums)
+
+
+# 快速排序
+def quick_sort(nums):
+    if len(nums) < 2:
+        return nums
+    else:
+        mid = nums[len(nums) // 2]
+        left = []
+        right = []
+        nums.remove(mid)
+        for num in nums:
+            if num >= mid:
+                right.append(num)
+            else:
+                left.append(num)
+        return quick_sort(left) + [mid] + quick_sort(right)
 
 
 # 插入排序
 def insertion_sort(nums):
-    for i in range(1, len(nums)):  # for表示循环插入的遍数
+    # 从1开始是因为已经将0位置的元素当做已排序的数
+    for i in range(1, len(nums)):
         # 设置当前需要插入的元素
         current = nums[i]
         # 与当前元素比较的比较元素
-        preindex = i - 1
-        while preindex >= 0 and nums[preindex] > current:
+        pre_index = i - 1
+        # while循环中依次比较当前元素与它之前的数的大小关系
+        while pre_index >= 0 and nums[pre_index] > current:
             # 当比较元素大于当前元素则把比较元素后移
-            nums[preindex + 1] = nums[preindex]
+            nums[pre_index + 1] = nums[pre_index]
             # 往前选择下一个比较元素
-            preindex -= 1
+            pre_index -= 1
             # 当比较元素小于当前元素 则把当前元素插入在其后
-            nums[preindex + 1] = current
-    print("插入排序结果如下：")
-    print(nums)  # 输出排序后的数据
+            nums[pre_index + 1] = current
+    # print("插入排序结果如下：")
+    # print(nums)  # 输出排序后的数据
 
 
 # 希尔排序
@@ -60,37 +121,8 @@ def shell_sort(nums):
             nums[j + gap] = current  # 这里的j是减过gap后不满足循环条件，所以这里的j要加上gap
 
         gap //= 2  # 将源列表分成更小的组，继续排序
-    print("希尔排序结果如下：")
-    print(nums)
-
-
-# 快速排序
-def quick_sort(nums):
-    if len(nums) >= 2:  # 进行快速排序
-        mid = nums[len(nums) // 2]
-        left = []
-        right = []
-        nums.remove(mid)
-        for num in nums:
-            if num >= mid:
-                right.append(num)
-            else:
-                left.append(num)
-        return quick_sort(left) + [mid] + quick_sort(right)
-    else:
-        return nums
-
-
-# 选择排序
-def sort_list(nums):
-    for i in range(len(nums)):  # 进行选择排序
-        min_index = i
-        for j in range(i + 1, len(nums)):
-            if nums[min_index] > nums[j]:
-                nums[j], nums[min_index] = nums[min_index], nums[j]
-    print("选择排序结果如下：")
-    print(nums)
-
+    # print("希尔排序结果如下：")
+    # print(nums)
 
 def main():
     # 进行插入排序
@@ -109,61 +141,28 @@ def main():
 
     # 进行冒泡排序
     start2 = datetime.datetime.now()  # 记录冒泡排序开始的时刻
-    MP(nums2)
+    bubble_sort(nums2)
     end2 = datetime.datetime.now()  # 记录冒泡排序结束的时刻
     print('冒泡排序运行时间为: %s.%s 秒' % ((end2 - start2).seconds, (end2 - start2).microseconds))  # 输出冒泡排序时间
     t2 = end2 - start2
 
     # 进行选择排序
     start3 = datetime.datetime.now()  # 记录选择排序开始的时刻
-    sort_list(nums3)
+    select_sort(nums3)
     end3 = datetime.datetime.now()  # 记录选择排序结束的时刻
     print('选择排序运行时间为: %s.%s 秒' % ((end3 - start3).seconds, (end3 - start3).microseconds))  # 输出选择排序时间
     t3 = end3 - start3
 
     # 进行快速排序
     start4 = datetime.datetime.now()
-    nums4q = quick_sort(nums4)
+    quick_sort(nums4)
     end4 = datetime.datetime.now()
-    print(nums4q)
     print('快速排序运行时间为: %s.%s 秒' % ((end4 - start4).seconds, (end4 - start4).microseconds))
     t4 = end4 - start4
-
-    ls_1 = []  # 建立一个列表用来存放算法运行时间
-    ls_1.append(t0)
-    ls_1.append(t1)
-    ls_1.append(t2)
-    ls_1.append(t3)
-    ls_1.append(t4)
-    ls = copy.deepcopy(ls_1)
-    sx = ['插入排序', '希尔排序', '冒泡排序', '选择排序', '快速排序']
-    min1 = ls_1.index(min(ls_1))  # 找到运行赶时间最短算法对应的时间下标
-    min_time1 = ls_1[min1]  # 记录下最快排序的时间
-    min_name1 = sx[min1]  # 记录下最快排序的名字
-    ls_1.pop(min1)  # 删除该时间，继续查找除了该算法之外的最优算法
-
-    min2 = ls_1.index(min(ls_1))  # 找到除了已去除算法之外的最优算法的下标
-    min_time2 = ls_1[min2]  # 记录下第二快排序的时间
-    min_name2 = sx[min2]  # 记录下第二快排序的名字
-
-    fw = open("E:\\Elegent\\time.txt", 'w')  # 建立一个txt文件用来存放最大增幅的月份
-    fw.write("排序算法性能最好的算法是：%s，该算法所需时间为：%s.%s秒，" % (
-        min_name1, min_time1.seconds, min_time1.microseconds))  # 将最优算法写入txt文件
-    fw.write("其次性能最好的是：%s，该算法所需时间为：%s.%s秒" % (
-        min_name2, min_time2.seconds, min_time2.microseconds))  # 将第二优算法写入txt文件
-    fw.write("\n")
-    fw.write("需要进行排序的序列为：")  # 将需要排序的序列保存至txt文件
-    fw.write(str(nums))
-    fw.write("\n\n")
-    fw.write("排序后的序列为：")  # 将排序好的序列保存至txt文件
-    fw.write(str(nums1))
-    fw.write("\n")
-    fw.write("每种排序算法所需时间如下：")
-    fw.write("\n")
-    i = 0
-    for i in range(len(ls)):  # 输出每种算法的所需时间
-        fw.write("%s所需时间为%s.%s秒\n" % (sx[i], ls[i].seconds, ls[i].microseconds))
-    fw.close()
-
-
+    
 main()
+
+# 快速排序和归并排序通常在不同长度的数列上都表现良好（特别是在大型数列上）。
+# 希尔排序在某些情况下表现良好，但是性能不稳定。
+# 选择排序和冒泡排序在大型数列上性能较差。
+# 插入排序在小型数列和接近有序的数列上性能较好，但在大型乱序数列上性能较差。
