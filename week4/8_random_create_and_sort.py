@@ -3,17 +3,38 @@ import random
 import datetime
 import copy
 
-num = range(0, 100000)
-# 随机地从指定列表中提取出1000个不同的元素，列表的维数没有限制
-nums = random.sample(num, 1000)
+num = range(0, 1000000)
+# 随机地从指定列表中提取出1000个、10000个和100000个不同的元素，列表的维数没有限制
+nums_small = random.sample(num, 1000)
+nums_medium = random.sample(num, 10000)
+nums_large = random.sample(num, 100000)
+
+
 # print(nums)
 # 将nums深度复制为5份
 # 深度复制是指重新分配一块内存，创建一个新的对象，并且将原对象中的元素，以递归的方式，通过创建新的子对象拷贝到新对象中。因此，新对象和原对象没有任何关联.
-nums0 = copy.deepcopy(nums)
-nums1 = copy.deepcopy(nums)
-nums2 = copy.deepcopy(nums)
-nums3 = copy.deepcopy(nums)
-nums4 = copy.deepcopy(nums)
+nums0_small = copy.deepcopy(nums_small)
+nums1_small = copy.deepcopy(nums_small)
+nums2_small = copy.deepcopy(nums_small)
+nums3_small = copy.deepcopy(nums_small)
+nums4_small = copy.deepcopy(nums_small)
+nums5_small = copy.deepcopy(nums_small)
+
+nums0_medium = copy.deepcopy(nums_medium)
+nums1_medium = copy.deepcopy(nums_medium)
+nums2_medium = copy.deepcopy(nums_medium)
+nums3_medium = copy.deepcopy(nums_medium)
+nums4_medium = copy.deepcopy(nums_medium)
+nums5_medium = copy.deepcopy(nums_medium)
+
+
+nums0_large = copy.deepcopy(nums_large)
+nums1_large = copy.deepcopy(nums_large)
+nums2_large = copy.deepcopy(nums_large)
+nums3_large = copy.deepcopy(nums_large)
+nums4_large = copy.deepcopy(nums_large)
+nums5_large = copy.deepcopy(nums_large)
+
 
 
 # 选择排序
@@ -26,8 +47,6 @@ def select_sort(nums):
                 nums[j], nums[min_num] = nums[min_num], nums[j]
     # print("选择排序结果如下：")
     # print(nums)
-
-
 
 
 # 归并排序
@@ -56,6 +75,8 @@ def merge(left, right):
     result += list(left[l:])
     result += list(right[r:])
     return result
+
+
 # print(mergesort(nums))
 
 
@@ -119,47 +140,167 @@ def shell_sort(nums):
                 nums[j + gap] = nums[j]
                 j -= gap
             nums[j + gap] = current  # 这里的j是减过gap后不满足循环条件，所以这里的j要加上gap
-
         gap //= 2  # 将源列表分成更小的组，继续排序
     # print("希尔排序结果如下：")
     # print(nums)
 
+
 def main():
+    # 1000个元素
     # 进行插入排序
     start0 = datetime.datetime.now()  # 记录插入排序开始时刻的时间
-    insertion_sort(nums0)
+    insertion_sort(nums0_small)
     end0 = datetime.datetime.now()  # 记录插入排序结束的时刻
-    print('插入排序运行时间为: %s.%s 秒' % ((end0 - start0).seconds, (end0 - start0).microseconds))  # 将插入排序所需时间输出
-    t0 = end0 - start0
+    print(
+        "1000个元素的随机数列进行插入排序运行时间为: %s.%s 秒" % ((end0 - start0).seconds, (end0 - start0).microseconds)
+    )  # 将插入排序所需时间输出
 
     # 进行希尔排序
     start1 = datetime.datetime.now()  # 记录希尔排序开始的时刻
-    shell_sort(nums1)
+    shell_sort(nums1_small)
     end1 = datetime.datetime.now()  # 记录希尔排序结束的时刻
-    print('希尔排序运行时间为: %s.%s 秒' % ((end1 - start1).seconds, (end1 - start1).microseconds))  # 输出希尔排序时间
-    t1 = end1 - start1
+    print(
+        "1000个元素的随机数列进行希尔排序运行时间为: %s.%s 秒" % ((end1 - start1).seconds, (end1 - start1).microseconds)
+    )  # 输出希尔排序时间
 
     # 进行冒泡排序
     start2 = datetime.datetime.now()  # 记录冒泡排序开始的时刻
-    bubble_sort(nums2)
+    bubble_sort(nums2_small)
     end2 = datetime.datetime.now()  # 记录冒泡排序结束的时刻
-    print('冒泡排序运行时间为: %s.%s 秒' % ((end2 - start2).seconds, (end2 - start2).microseconds))  # 输出冒泡排序时间
-    t2 = end2 - start2
+    print(
+        "1000个元素的随机数列进行冒泡排序运行时间为: %s.%s 秒" % ((end2 - start2).seconds, (end2 - start2).microseconds)
+    )  # 输出冒泡排序时间
+    
 
     # 进行选择排序
     start3 = datetime.datetime.now()  # 记录选择排序开始的时刻
-    select_sort(nums3)
+    select_sort(nums3_small)
     end3 = datetime.datetime.now()  # 记录选择排序结束的时刻
-    print('选择排序运行时间为: %s.%s 秒' % ((end3 - start3).seconds, (end3 - start3).microseconds))  # 输出选择排序时间
-    t3 = end3 - start3
+    print(
+        "1000个元素的随机数列进行选择排序运行时间为: %s.%s 秒" % ((end3 - start3).seconds, (end3 - start3).microseconds)
+    )  # 输出选择排序时间
+    
 
     # 进行快速排序
     start4 = datetime.datetime.now()
-    quick_sort(nums4)
+    quick_sort(nums4_small)
     end4 = datetime.datetime.now()
-    print('快速排序运行时间为: %s.%s 秒' % ((end4 - start4).seconds, (end4 - start4).microseconds))
-    t4 = end4 - start4
+    print(
+        "1000个元素的随机数列进行快速排序运行时间为: %s.%s 秒" % ((end4 - start4).seconds, (end4 - start4).microseconds)
+    )
     
+    # 进行归并排序
+    start5 = datetime.datetime.now()
+    mergesort(nums5_small)
+    end5 = datetime.datetime.now()
+    print(
+        "1000个元素的随机数列进行归并排序运行时间为: %s.%s 秒" % ((end5 - start5).seconds, (end5 - start5).microseconds)
+    )
+    
+    
+    # 10000个元素
+     # 进行插入排序
+    start0 = datetime.datetime.now()  # 记录插入排序开始时刻的时间
+    insertion_sort(nums0_medium)
+    end0 = datetime.datetime.now()  # 记录插入排序结束的时刻
+    print(
+        "10000个元素的随机数列进行插入排序运行时间为: %s.%s 秒" % ((end0 - start0).seconds, (end0 - start0).microseconds)
+    )  # 将插入排序所需时间输出
+
+    # 进行希尔排序
+    start1 = datetime.datetime.now()  # 记录希尔排序开始的时刻
+    shell_sort(nums1_medium)
+    end1 = datetime.datetime.now()  # 记录希尔排序结束的时刻
+    print(
+        "10000个元素的随机数列进行希尔排序运行时间为: %s.%s 秒" % ((end1 - start1).seconds, (end1 - start1).microseconds)
+    )  # 输出希尔排序时间
+
+    # 进行冒泡排序
+    start2 = datetime.datetime.now()  # 记录冒泡排序开始的时刻
+    bubble_sort(nums2_medium)
+    end2 = datetime.datetime.now()  # 记录冒泡排序结束的时刻
+    print(
+        "10000个元素的随机数列进行冒泡排序运行时间为: %s.%s 秒" % ((end2 - start2).seconds, (end2 - start2).microseconds)
+    )  # 输出冒泡排序时间
+    
+
+    # 进行选择排序
+    start3 = datetime.datetime.now()  # 记录选择排序开始的时刻
+    select_sort(nums3_medium)
+    end3 = datetime.datetime.now()  # 记录选择排序结束的时刻
+    print(
+        "10000个元素的随机数列进行选择排序运行时间为: %s.%s 秒" % ((end3 - start3).seconds, (end3 - start3).microseconds)
+    )  # 输出选择排序时间
+    
+
+    # 进行快速排序
+    start4 = datetime.datetime.now()
+    quick_sort(nums4_medium)
+    end4 = datetime.datetime.now()
+    print(
+        "10000个元素的随机数列进行快速排序运行时间为: %s.%s 秒" % ((end4 - start4).seconds, (end4 - start4).microseconds)
+    )
+    
+    # 进行归并排序
+    start5 = datetime.datetime.now()
+    mergesort(nums5_medium)
+    end5 = datetime.datetime.now()
+    print(
+        "10000个元素的随机数列进行归并排序运行时间为: %s.%s 秒" % ((end5 - start5).seconds, (end5 - start5).microseconds)
+    )
+    
+    #100000个元素
+    # 进行插入排序
+    start0 = datetime.datetime.now()  # 记录插入排序开始时刻的时间
+    insertion_sort(nums0_large)
+    end0 = datetime.datetime.now()  # 记录插入排序结束的时刻
+    print(
+        "100000个元素的随机数列进行插入排序运行时间为: %s.%s 秒" % ((end0 - start0).seconds, (end0 - start0).microseconds)
+    )  # 将插入排序所需时间输出
+
+    # 进行希尔排序
+    start1 = datetime.datetime.now()  # 记录希尔排序开始的时刻
+    shell_sort(nums1_large)
+    end1 = datetime.datetime.now()  # 记录希尔排序结束的时刻
+    print(
+        "100000个元素的随机数列进行希尔排序运行时间为: %s.%s 秒" % ((end1 - start1).seconds, (end1 - start1).microseconds)
+    )  # 输出希尔排序时间
+
+    # 进行冒泡排序
+    start2 = datetime.datetime.now()  # 记录冒泡排序开始的时刻
+    bubble_sort(nums2_large)
+    end2 = datetime.datetime.now()  # 记录冒泡排序结束的时刻
+    print(
+        "100000个元素的随机数列进行冒泡排序运行时间为: %s.%s 秒" % ((end2 - start2).seconds, (end2 - start2).microseconds)
+    )  # 输出冒泡排序时间
+    
+
+    # 进行选择排序
+    start3 = datetime.datetime.now()  # 记录选择排序开始的时刻
+    select_sort(nums3_large)
+    end3 = datetime.datetime.now()  # 记录选择排序结束的时刻
+    print(
+        "100000个元素的随机数列进行选择排序运行时间为: %s.%s 秒" % ((end3 - start3).seconds, (end3 - start3).microseconds)
+    )  # 输出选择排序时间
+    
+
+    # 进行快速排序
+    start4 = datetime.datetime.now()
+    quick_sort(nums4_large)
+    end4 = datetime.datetime.now()
+    print(
+        "100000个元素的随机数列进行快速排序运行时间为: %s.%s 秒" % ((end4 - start4).seconds, (end4 - start4).microseconds)
+    )
+    
+    # 进行归并排序
+    start5 = datetime.datetime.now()
+    mergesort(nums5_large)
+    end5 = datetime.datetime.now()
+    print(
+        "100000个元素的随机数列进行归并排序运行时间为: %s.%s 秒" % ((end5 - start5).seconds, (end5 - start5).microseconds)
+    )
+
+
 main()
 
 # 快速排序和归并排序通常在不同长度的数列上都表现良好（特别是在大型数列上）。
