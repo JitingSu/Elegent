@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2e2c8fc4-e336-4103-8510-6ab4aa1f8926" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../week2/hw5sorted.py" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/hw5sorted.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/hw9.py" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/hw9.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week3/hw3_crossriver.py" beforeDir="false" afterPath="$PROJECT_DIR$/../week3/hw3_crossriver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week4/8_random_create_and_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/../week4/8_random_create_and_sort.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2WZqUfAS0iYC78FmejyxEHDE4fJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/Elegent/week5"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2e2c8fc4-e336-4103-8510-6ab4aa1f8926" name="Changes" comment="" />
+      <created>1696950466636</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696950466636</updated>
+    </task>
+    <servers />
+  </component>
+</project>
